@@ -1,0 +1,129 @@
+<html>
+<head>
+    <body>
+    <script type = "text/javascript">
+        //ask user the lottery numbers + lucky ball they are choosing
+        var user_numbers = prompt("Enter the first five winning numbers separated by a space");
+        var user_luckynum = prompt("Enter the lucky ball number");
+        
+        //store values accordingly 
+        var number_arr = user_numbers.split(" ").map(Number);
+        var lucky_num = parseInt(user_luckynum);
+        
+        //sort number_arr from smallest to largest AKA winning numbers sorted
+        var number_arr = number_arr.sort(function(a, b) {return a - b});
+        
+        //initialize array 
+        let unsorted_random_num = new Array(5);
+        
+        //display random picks 
+        document.write("Random Pick: ");
+        //choose 5 random numbers and store them in an array
+        for (var i = 0; i < unsorted_random_num.length; i++) {
+            unsorted_random_num[i] = Math.floor(Math.random() * (49 - 1) + 1);
+            document.write(unsorted_random_num[i] + " ");
+        }
+        
+        //choose random lucky number
+        var real_luckynum = Math.floor(Math.random() * (19 - 1) + 1);
+        
+        //print lucky number 
+        document.write("lucky " + real_luckynum + "<br >")
+        
+        //sort random_num array from smallest to largest and print it
+        var sorted_random_num = unsorted_random_num.sort(function(a, b) {return a - b});
+        
+        document.write("Pick sorted: ")
+        for (var i = 0; i < sorted_random_num.length; i++) {
+            document.write(sorted_random_num[i] + " ");
+        }
+        
+        //print lucky number 
+        document.write("lucky " + real_luckynum + "<br >")
+        
+        //Print winning numbers sorted and lucky number 
+        document.write("Winning numbers sorted: ");
+        for (var i = 0; i < number_arr.length; i++) {
+            document.write(number_arr[i] + " ");
+        }
+        document.write("lucky " + lucky_num + "<br >");
+        
+        //initialize counter 
+        var number_counter = 0; 
+        
+        //parse through both arrays and if they match at given i,
+        //increase counter for number matching
+        for (var i = 0; i < sorted_random_num.length; i++) {
+            if (sorted_random_num[i] == number_arr[i]) {
+                number_counter++; 
+            }
+        }
+        //Display how many numbers match 
+        document.write("Number matching: " + number_counter + "<br >");
+        
+        //check if lucky ball matches and print message accordingly
+        var is_luckynum = false; 
+        
+        if (lucky_num == real_luckynum) {
+            is_luckynum = true;
+            document.write("Lucky ball matches!" + "<br >");
+        }
+        
+        else if (lucky_num != real_luckynum) {
+            document.write("Lucky ball does not match" + "<br >");
+        }
+        
+        //add up winnings and display them
+        document.write("Your winnings: ")
+        if (number_counter == 0 && is_luckynum) {
+            document.write("$4");
+        }
+        
+        else if (number_counter == 1 && is_luckynum) {
+            document.write("$6");
+        }
+        
+        else if (number_counter == 2) {
+            if (is_luckynum) {
+                document.write("$25");
+            }
+            else {
+                document.write("$3");
+            }
+        }
+        
+        else if (number_counter == 3) {
+            if (is_luckynum) {
+                document.write("$150");
+            }
+            else {
+                document.write("$20");
+            }
+        }
+        
+        else if (number_counter == 4) {
+            if (is_luckynum) {
+                document.write("$5,000");
+            }
+            else {
+                document.write("$200");
+            }
+        }
+        
+        else if (number_counter == 5) {
+            if (is_luckynum) {
+                document.write("$7,000 a WEEK for LIFE");
+            }
+            else {
+                document.write("$25,000 a YEAR for LIFE");
+            }
+        }
+        
+        else {
+            document.write(" ");
+        }
+        
+    </script>
+    </body>
+</head>    
+</html>
